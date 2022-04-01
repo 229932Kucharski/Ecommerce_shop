@@ -11,9 +11,17 @@ import { ProductService } from 'src/app/services/product.service';
 export class ProductListComponent implements OnInit {
 
   products: Product[] = [];
-  currentCategoryId: number | undefined;
+  currentCategoryId: number = 1;
+  previousCategoryId: number = 1;
   currentCategoryName!: string;
   searchMode!: boolean;
+
+  pageNumber: number = 1;
+  pageSize: number = 10;
+  totalElements: number = 0;
+
+  previousKeyword?: string;
+
 
   constructor(private productService: ProductService, private route: ActivatedRoute) { }
 
@@ -21,6 +29,12 @@ export class ProductListComponent implements OnInit {
     this.route.paramMap.subscribe(() => {
       this.listProducts();
     });
+  }
+
+  updatePageSize(pageSize: number) {
+    this.pageSize = pageSize;
+    this.pageNumber = 1;
+    this.listProducts();
   }
 
   listProducts() {
@@ -34,11 +48,13 @@ export class ProductListComponent implements OnInit {
 
   handleSearchProducts() {
     const keyword: string = this.route.snapshot.paramMap.get('keyword')!;
-    this.productService.searchProducts(keyword).subscribe(
-      data => {
-        this.products = data;
-      }
-    )
+    if (this.previousKeyword != keyword) {
+      this.pageNumber = 1;
+    }
+    this.previousKeyword = keyword;
+    this.productService.searchProductsPaginate(this.pageNumber - 1, 
+                                              this.pageSize, 
+                                              keyword).subscribe(this.processResult());
   }
 
   handleListProducts() {
@@ -53,12 +69,26 @@ export class ProductListComponent implements OnInit {
       this.currentCategoryId = 1;
       this.currentCategoryName = 'Books';
     }
+
+    //if new category number, then reset page number
+    if (this.previousCategoryId != this.currentCategoryId) {
+      this.pageNumber = 1;
+    }
+
+    this.previousCategoryId = this.currentCategoryId;
+
     // get products for given id
-    this.productService.getProdcutList(this.currentCategoryId).subscribe(
-      data => {
-        this.products = data;
-      }
-    )
+    this.productService.getProductListPaginate(this.pageNumber - 1, this.pageSize, this.currentCategoryId)
+    .subscribe(this.processResult());
+  }
+
+  private processResult() {
+    return (data: any) => {
+      this.products = data._embedded.products;
+      this.pageNumber = data.page.number + 1;
+      this.pageSize = data.page.size;
+      this.totalElements = data.page.totalElements;
+    }
   }
 
 }
