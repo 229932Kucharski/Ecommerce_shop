@@ -701,18 +701,16 @@ select {
 }
 table.table.table-bordered {
   border: 1px solid #ccc;
-  background: #fff;
 }
-.table-bordered td,
-.table-bordered th {
-  border: 1px solid #dee2e6;
-}
+table.table.table-bordered tr, table.table.table-bordered td {
+  border: 1px solid #c7cbce;
+} 
 table.table.table-bordered th {
   background: #0da8e4;
   color: #fff;
   font-size: 14px;
   padding: 7px;
-}
+} 
 .table-responsive {
   padding-right: 1px;
 }
