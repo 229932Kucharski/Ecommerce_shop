@@ -19,6 +19,18 @@ export class CartDetailsComponent implements OnInit {
     this.listCartDetails();
   }
 
+  incrementQuantity(cartItem: CartItem) {
+    this.cartService.addToCart(cartItem);
+  }
+
+  decrementQuantity(cartItem: CartItem) {
+    this.cartService.decrementQuantity(cartItem);
+  }
+
+  remove(cartItem: CartItem) {
+    this.cartService.remove(cartItem);
+  }
+
   private listCartDetails() {
     this.cartItems = this.cartService.cartItems;
     this.cartService.totalPrice.subscribe(
