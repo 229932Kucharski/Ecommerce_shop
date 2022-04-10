@@ -15,7 +15,7 @@ import { CartStatusComponent } from './components/cart-status/cart-status.compon
 import { CartService } from './services/cart.service';
 import { CartDetailsComponent } from './components/cart-details/cart-details.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, Validators } from '@angular/forms';
 
 const routes: Routes = [
   {path: 'checkout', component: CheckoutComponent},
