@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ProductService } from './services/product.service';
+
 import { Routes, RouterModule, Router } from '@angular/router';
 import { ProductCategoryMenuComponent } from './components/product-category-menu/product-category-menu.component';
 import { SearchComponent } from './components/search/search.component';
@@ -16,6 +17,7 @@ import { CartService } from './services/cart.service';
 import { CartDetailsComponent } from './components/cart-details/cart-details.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { ReactiveFormsModule, Validators } from '@angular/forms';
+
 import { LoginComponent } from './components/login/login.component';
 import { LoginStatusComponent } from './components/login-status/login-status.component';
 
@@ -33,7 +35,7 @@ const oktaConfig = Object.assign({
     // Redirect the user to your custom login page
     router.navigate(['/login']);
   }
-}, myAppConfig.oird);
+}, myAppConfig.oidc);
 
 const oktaAuth = new OktaAuth(oktaConfig);
 
@@ -72,7 +74,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     OktaAuthModule
   ],
-  providers: [ProductService, CartService, {provide: OKTA_CONFIG, useValue: oktaConfig}],
+  providers: [ProductService, CartService, {provide: OKTA_CONFIG, useValue: {oktaAuth}}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
