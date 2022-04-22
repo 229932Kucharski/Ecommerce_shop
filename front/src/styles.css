@@ -224,7 +224,7 @@ section {
 }
 
 .au-input-xl {
-  min-width: 935px;
+  min-width: 500px;
 }
 
 input.au-input.au-input-xl {
@@ -708,6 +708,11 @@ table.table.table-bordered tr, table.table.table-bordered td {
 table.table.table-bordered th {
   background: #0da8e4;
   color: #fff;
+  font-size: 14px;
+  padding: 7px;
+} 
+table.table.table-bordered td {
+  background: #ffffff;
   font-size: 14px;
   padding: 7px;
 } 
