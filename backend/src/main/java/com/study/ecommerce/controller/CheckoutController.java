@@ -5,7 +5,6 @@ import com.study.ecommerce.dto.PurchaseResponse;
 import com.study.ecommerce.service.CheckoutService;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin
 @RestController
 @RequestMapping("/api/checkout")
 public class CheckoutController {
@@ -20,6 +19,5 @@ public class CheckoutController {
     public PurchaseResponse placeOrder(@RequestBody Purchase purchase) {
         return checkoutService.placeOrder(purchase);
     }
-
 
 }
