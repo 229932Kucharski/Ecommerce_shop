@@ -6,6 +6,3 @@ export default {
         scopes: ['openid', 'profile', 'email'],
     }
 }
-
-// dev-37536873.okta.com
-// 0oa4nq3n8aCrmfZYD5d7
