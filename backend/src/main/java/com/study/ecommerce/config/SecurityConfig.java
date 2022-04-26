@@ -24,5 +24,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // set response body for 401
         Okta.configureResourceServer401ResponseBody(http);
 
+        http.csrf().disable();
+
     }
 }
